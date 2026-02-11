@@ -1,17 +1,34 @@
-import { User as TPrismaUser } from 'src/generated/prisma/client';
-import bcrypt from 'bcrypt';
+import { BadRequestError, UnauthorizedError } from 'src/errors/errors';
+
+interface UserProps {
+  id: string;
+  username: string;
+  password: string;
+  isDeleted: boolean;
+  createdAt: Date;
+}
 
 export default class User {
-  constructor(private readonly data: TPrismaUser) { }
+  constructor(private readonly data: UserProps) { }
 
   get id() {
     return this.data.id;
   }
+
+  get password() {
+    return this.data.password;
+  }
+
   get username() {
     return this.data.username;
   }
+
   get isDeleted() {
     return this.data.isDeleted;
+  }
+
+  get createdAt() {
+    return this.data.createdAt;
   }
 
   public delete() {
@@ -21,28 +38,26 @@ export default class User {
     this.data.isDeleted = true;
   }
 
-  public async validatePassword(hasher: any, password: string) {
-    const val = hasher(password, this.data.password);
-    if (!val) throw new Error('invalid password');
+  public async validatePassword(compareFn: (plainString: string, hashVal: string) => Promise<boolean>, password: string) {
+    if (this.data.isDeleted) throw new UnauthorizedError('ACCOUNT_TERMINATED: this account has been terminated')
+    const val = compareFn(password, this.data.password);
+    if (!val) throw new UnauthorizedError('UNAUTHORIZED: invalid credential');
   }
 
-  public async updatePassword(newPassword: string) {
+  public async updatePassword(newPassword: string, hashFn: (plain: string, salt: number) => Promise<string>) {
+    if (this.data.isDeleted) throw new UnauthorizedError('ACCOUNT_TERMINATED: this account has been terminated')
     if (newPassword.length < 8) {
-      throw new Error('Password must be at least 8 characters long.');
+      throw new BadRequestError('Password must be at least 8 characters long.');
     }
-    this.data.password = await bcrypt.hash(newPassword, 10);
+    this.data.password = await hashFn(newPassword, 10);
   }
 
-  public canPerformTransaction(): boolean {
+  public canPerformActions(): boolean {
     return !this.data.isDeleted;
   }
 
-  public toPersistence() {
-    return { ...this.data };
-  }
-
-  public toResponseFormat() {
-    const { password: _, ...rest } = this.data;
+  public toJSON() {
+    const { password, isDeleted, ...rest } = this.data;
     return rest;
   }
 }

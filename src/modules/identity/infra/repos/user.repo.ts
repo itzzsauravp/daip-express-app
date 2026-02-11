@@ -1,30 +1,32 @@
 import prisma from 'src/lib/prisma.lib';
 import { TCreateUser, TUpdateUser } from 'src/types/user.types';
-import User from '../../domain/entities/User';
+import { UserMapper } from './user.mapper';
+import { IUserRepository } from '../../app/ports/IUserRepository';
 
-export class UserRepo {
-  static async findById(id: string) {
+export class UserRepo implements IUserRepository {
+
+  async findById(id: string) {
     const user = await prisma.user.findUnique({
       where: { id },
     });
-    return new User(user);
+    return UserMapper.toDomain(user);
   }
 
-  static async findByUsername(username: string) {
+  async findByUsername(username: string) {
     const user = await prisma.user.findUnique({
       where: { username },
     });
-    return new User(user);
+    return UserMapper.toDomain(user);
   }
 
-  static async create(data: TCreateUser) {
+  async create(data: TCreateUser) {
     const user = await prisma.user.create({
       data,
     });
-    return new User(user);
+    return UserMapper.toDomain(user);
   }
 
-  static async delete(id: string) {
+  async delete(id: string) {
     await prisma.user.delete({
       where: {
         id,
@@ -32,10 +34,11 @@ export class UserRepo {
     });
   }
 
-  static async update(data: TUpdateUser) {
+  async save(data: TUpdateUser) {
     await prisma.user.update({
       where: { id: data.id },
       data,
     });
   }
+
 }
