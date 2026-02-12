@@ -1,4 +1,4 @@
-import { TCreateWallet } from 'src/types/wallet.types';
+import { TCreateWallet } from 'src/shared/domain/types/wallet.types';
 import { Wallet } from '../entities/Wallet';
 
 export interface IWalletRepository {

@@ -1,4 +1,4 @@
-import { TCreateUser } from "src/types/user.types";
+import { TCreateUser } from "src/shared/domain/types/user.types";
 import User from "../../domain/entities/User";
 
 export interface IUserRepository {

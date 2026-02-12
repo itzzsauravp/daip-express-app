@@ -1,4 +1,4 @@
-import { TCreateUser, TLoginUser } from 'src/types/user.types';
+import { TCreateUser, TLoginUser } from 'src/shared/domain/types/user.types';
 import { IHasher } from '../ports/IHasher';
 import { ITokenProvider } from '../ports/ITokenProvider';
 import { UserRepo } from '../../infra/repos/user.repo';

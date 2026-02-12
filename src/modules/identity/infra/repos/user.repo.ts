@@ -1,5 +1,5 @@
 import prisma from 'src/lib/prisma.lib';
-import { TCreateUser, TUpdateUser } from 'src/types/user.types';
+import { TCreateUser, TUpdateUser } from 'src/shared/domain/types/user.types';
 import { UserMapper } from './user.mapper';
 import { IUserRepository } from '../../app/ports/IUserRepository';
 

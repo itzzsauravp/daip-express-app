@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { SuccessResponse } from 'src/helpers/general.helpers';
-import { HTTP_STATUS } from 'src/constants/http.constants';
+import { SuccessResponse } from 'src/shared/infra/helpers/general.helpers';
+import { HTTP_STATUS } from 'src/shared/domain/constants/http.constants';
 import { authService } from '../../identity.module';
 
 export async function signup(req: Request, res: Response) {

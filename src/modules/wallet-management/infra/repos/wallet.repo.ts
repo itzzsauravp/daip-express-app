@@ -1,4 +1,4 @@
-import { TCreateWallet } from "src/types/wallet.types";
+import { TCreateWallet } from "src/shared/domain/types/wallet.types";
 import { Wallet } from "../../domain/entities/Wallet";
 import { IWalletRepository } from "../../domain/ports/IWalletRepository";
 import prisma from "src/lib/prisma.lib";

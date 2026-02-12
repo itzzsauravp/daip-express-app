@@ -1,7 +1,7 @@
 import express from 'express';
 import v1Router from './api/v1/routes';
 import cookieParser from 'cookie-parser';
-import ErrorHandler from './middlewares/error-hanlder.middleware';
+import ErrorHandler from './shared/api/middlewares/error-hanlder.middleware';
 
 const app = express();
 app.use(express.json());
