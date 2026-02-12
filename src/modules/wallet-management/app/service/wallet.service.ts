@@ -1,6 +1,6 @@
-import { NotFoundError } from "src/errors/errors";
 import { WalletRepo } from "../../infra/repos/wallet.repo";
 import { Wallet } from "../../domain/entities/Wallet";
+import { NotFoundError } from "src/shared/domain/errors/errors";
 
 export class WalletService {
   constructor(private readonly walletRepo: WalletRepo) { }

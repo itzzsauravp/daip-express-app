@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
-import { BaseError, ValidationError } from '../errors/errors';
 import { HTTP_STATUS } from '../../domain/constants/http.constants';
 import { Prisma } from '../../../generated/prisma/client';
+import { BaseError, ValidationError } from 'src/shared/domain/errors/errors';
 
 export default function ErrorHandler(err: Error, _req: Request, res: Response, _next: NextFunction) {
     let statusCode: number = HTTP_STATUS.INTERNAL_SERVER_ERROR;

@@ -1,4 +1,4 @@
-import { BadRequestError, UnauthorizedError } from 'src/errors/errors';
+import { BadRequestError, UnauthorizedError } from "src/shared/domain/errors/errors";
 
 interface UserProps {
   id: string;

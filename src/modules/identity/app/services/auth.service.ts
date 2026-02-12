@@ -2,7 +2,7 @@ import { TCreateUser, TLoginUser } from 'src/shared/domain/types/user.types';
 import { IHasher } from '../ports/IHasher';
 import { ITokenProvider } from '../ports/ITokenProvider';
 import { UserRepo } from '../../infra/repos/user.repo';
-import { BadRequestError, UnauthorizedError } from 'src/errors/errors';
+import { BadRequestError, UnauthorizedError } from 'src/shared/domain/errors/errors';
 
 export class AuthService {
   constructor

@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import { ITokenProvider } from '../../../modules/identity/app/ports/ITokenProvider';
-import { BadRequestError, UnauthorizedError } from 'src/errors/errors';
+import { BadRequestError, UnauthorizedError } from 'src/shared/domain/errors/errors';
 
 export const authMiddleware = (tokenProvider: ITokenProvider) => {
   return (req: Request, _res: Response, next: NextFunction) => {

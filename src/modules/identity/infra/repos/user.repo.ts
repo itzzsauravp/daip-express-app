@@ -1,7 +1,7 @@
-import prisma from 'src/lib/prisma.lib';
 import { TCreateUser, TUpdateUser } from 'src/shared/domain/types/user.types';
 import { UserMapper } from './user.mapper';
 import { IUserRepository } from '../../app/ports/IUserRepository';
+import prisma from 'src/shared/infra/lib/prisma.lib';
 
 export class UserRepo implements IUserRepository {
 

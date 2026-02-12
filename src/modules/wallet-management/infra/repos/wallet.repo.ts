@@ -1,8 +1,8 @@
 import { TCreateWallet } from "src/shared/domain/types/wallet.types";
 import { Wallet } from "../../domain/entities/Wallet";
 import { IWalletRepository } from "../../domain/ports/IWalletRepository";
-import prisma from "src/lib/prisma.lib";
 import { WalletMapper } from "./wallet.mapper";
+import prisma from "src/shared/infra/lib/prisma.lib";
 
 export class WalletRepo implements IWalletRepository {
 

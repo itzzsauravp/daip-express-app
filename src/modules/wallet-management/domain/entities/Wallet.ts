@@ -1,4 +1,4 @@
-import { BadRequestError, NotFoundError } from "src/errors/errors";
+import { BadRequestError } from "src/shared/domain/errors/errors";
 
 export interface WalletProps {
   id: string;
